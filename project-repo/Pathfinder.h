@@ -5,7 +5,7 @@
 class Pathfinder {
     public: 
         Pathfinder();
-        Pathfinder(UndirectedGraph graph);
+        Pathfinder(UndirectedGraph* graph);
         template <typename T>
         int shortestPath(Node<T>* toFind); 
         template <typename T>
