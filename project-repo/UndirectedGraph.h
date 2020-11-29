@@ -1,6 +1,7 @@
 #pragma ONCE
 #include <Node.h>
 #include <string>
+#include <fstream>
 using std::string;
 
 class UndirectedGraph {
