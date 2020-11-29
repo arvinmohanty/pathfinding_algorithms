@@ -1,6 +1,6 @@
-#pragma ONCE
-#include <Node.h>
-#include <UndirectedGraph.h>
+#pragma once
+#include "Node.h"
+#include "UndirectedGraph.h"
 
 class Pathfinder {
     public: 

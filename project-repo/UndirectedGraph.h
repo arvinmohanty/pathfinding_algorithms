@@ -1,5 +1,5 @@
-#pragma ONCE
-#include <Node.h>
+#pragma once
+#include "Node.h"
 #include <string>
 #include <fstream>
 using std::string;
