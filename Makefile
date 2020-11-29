@@ -31,7 +31,7 @@ output_msg: ; $(CLANG_VERSION_MSG)
 $(EXENAME) : output_msg $(OBJS)
 	$(LD) $(OBJS) $(LDFLAGS) -o $(EXENAME)
 
-main.o : project-repo/main.cpp
+main.o : project-repo/main.cpp project-repo/Node.h project-repo/Pathfinder.h project-repo/UndirectedGraph.h
 	$(CXX) $(CXXFLAGS) project-repo/main.cpp
 
 Node.o : project-repo/Node.cpp project-repo/Node.h
