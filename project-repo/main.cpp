@@ -4,5 +4,6 @@
 #include <iostream>
 
 int main() {
-    std::cout << "hi";
+    
+    UndirectedGraph a("roadNet-CA.txt");
 }
