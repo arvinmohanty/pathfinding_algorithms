@@ -9,47 +9,53 @@ UndirectedGraph::UndirectedGraph() {
 
 UndirectedGraph::UndirectedGraph(string filename) {
 
-    //reading file into graph represented by adj_matrix
-    //, adjusting size of adj_matrix, and creating edges
+    //adjacency matrix wont work because of space constraints, ud have a matrix with 1.9 million
+    //rows each with 1.9 million
+    //adjacency list works since the road network is sparse, intuition: roads in one place dont connect to roads
+    //in a completely different place, so each inner vector will be smaller than 1.9 million
 
     std::string arv;
     std::ifstream file(filename);
-    int count = 0;
+    
     
     int max = INT_MIN;
 
-    while(!file.eof()) {
+    //two pass approach, first to find highest node id (tells us how many nodes there are), 
+    //second to put edges into adjacency list
+    //need highest node since nodes are named starting from 0
+
+    while(getline(file, arv)) {
         
-        getline(file, arv);
-
         if (arv[0] == '#') continue;
-
-    
-
     
         std::stringstream split(arv);
         int start;
         int end;
 
-        split >> start;
-        split >> end;
+        split >> start >> end;
 
         max = std::max(max, std::max(start, end));
+        
+    }
 
+    //need to add 1 to size so we can actually index last node
+    adj_list.resize(max + 1, vector<int>());
 
-        //need to add 1 because of basic vector size rules
+    while(getline(file, arv)) {
+        
+        if (arv[0] == '#') continue;
+    
+        std::stringstream split(arv);
+        int start;
+        int end;
 
-        //linear time
-
-        std::cout << start << " " << end << std::endl;
-
-        adj_matrix.resize(max + 1, vector<int> (max + 1, 0));
+        split >> start >> end;
 
         addEdge(start, end);
-
         
-        count++;
     }
+
+
 
 
 }
@@ -64,9 +70,6 @@ UndirectedGraph::~UndirectedGraph() {
 
 void UndirectedGraph::addEdge(int start, int end) {
     //edge going from start to end
-
-    
-
-
+    adj_list[start].push_back(end);
 
 }

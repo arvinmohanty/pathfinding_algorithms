@@ -16,7 +16,7 @@ class UndirectedGraph {
         UndirectedGraph(string filename);
 
 
-        std::vector<vector<int>> adj_matrix;
+        std::vector<std::vector<int>> adj_list;
 
         void addEdge(int start, int end);
 
