@@ -5,6 +5,11 @@
 #include <vector>
 using std::string;
 
+//A road network of California. Intersections and endpoints are represented by nodes and 
+//the roads connecting these intersections or road endpoints are represented by undirected edges.
+
+
+
 class UndirectedGraph {
     public:
         UndirectedGraph();

@@ -43,7 +43,6 @@ UndirectedGraph::UndirectedGraph(string filename) {
     adj_list.resize(node_count, vector<int>());
 
     //reset ifstream to beginning or file to be reread and edges made
-
     file.clear();
     file.seekg(0);
 
@@ -56,10 +55,12 @@ UndirectedGraph::UndirectedGraph(string filename) {
         int end;
 
         split >> start >> end;
+        //std::cout << start << " " << end << std::endl;
 
         addEdge(start, end);
         
     }
+    
 
 
 
@@ -75,7 +76,10 @@ UndirectedGraph::~UndirectedGraph() {
 }
 
 void UndirectedGraph::addEdge(int start, int end) {
-    //edge going from start to end
+    //edge going from start to end, and end to start, since dataset is undirected according to stanford snap
     adj_list[start].push_back(end);
+    adj_list[end].push_back(start);
+
+
 
 }

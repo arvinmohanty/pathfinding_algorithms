@@ -1,5 +1,6 @@
 #include "Pathfinder.h"
 #include <iostream>
+#include <queue>
 
 Pathfinder::Pathfinder() {
   
@@ -10,7 +11,61 @@ Pathfinder::Pathfinder(UndirectedGraph graph) {
     roads = graph;
 }
 
-int Pathfinder::shortestPath(int NodeID) {
+//if path does not exist, return false
+//using bfs and recording distance of each node visited from start node
+
+//too slow
+bool Pathfinder::shortestPath(int startNode, int endNode) {
+    
+
+    //for bfs
+
+    std::queue<int> bfs;
+
+    vector<bool> has_seen(roads.node_count, false);
+    vector<int> dist(roads.node_count);
+    
+    //starting at start node
+    has_seen[startNode] = true;
+    dist[startNode] = 0;
+
+    bfs.push(startNode);
+
+    while (!bfs.empty()) {
+        int front = bfs.front();
+
+        //i is each node id
+        for (int i : roads.adj_list[front]) {
+
+            if (has_seen[i] == false) {
+                has_seen[i] = true;
+                dist[i] = dist[front] + 1;
+
+
+                //have reached endNode
+
+                if (i == endNode) {
+                    std::cout << dist[i];
+                    return true;
+                }
+                
+                bfs.push(i);
+                //pushing back for later bfs on this node
+            }
+        }
+
+    }
+
+
+
+
+
+
+
+
+
+
+
     return 0;
 
 }
@@ -26,12 +81,11 @@ void Pathfinder::dfs(int NodeID) {
 
 }
 
-//dfs
+//dfs complete
 void Pathfinder::dfs_helper(int NodeID, std::vector<bool> visited) {
     
     visited[NodeID] = true;
-    std::cout << NodeID;
-    //adj_list[NodeID]
+    // std::cout << NodeID;
 
     //each int i corresponds to a nodeID
     for (int i : roads.adj_list[NodeID]) {

@@ -7,7 +7,7 @@ class Pathfinder {
         Pathfinder();
         Pathfinder(UndirectedGraph graph);
         
-        int shortestPath(int NodeID); 
+        bool shortestPath(int startNode, int endNode); 
 
         //nodeID from starting node
         void dfs(int NodeID);
