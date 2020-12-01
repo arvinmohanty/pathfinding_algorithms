@@ -39,7 +39,13 @@ UndirectedGraph::UndirectedGraph(string filename) {
     }
 
     //need to add 1 to size so we can actually index last node
-    adj_list.resize(max + 1, vector<int>());
+    node_count = max + 1;
+    adj_list.resize(node_count, vector<int>());
+
+    //reset ifstream to beginning or file to be reread and edges made
+
+    file.clear();
+    file.seekg(0);
 
     while(getline(file, arv)) {
         
