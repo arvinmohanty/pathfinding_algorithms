@@ -14,7 +14,7 @@ class Pathfinder {
 
         void dfs_helper(int NodeID, vector<bool> visited);
         
-        int landmarkPath(int landmarkID, int toGoToID); // returns an int? unsure
+        bool landmarkPath(int startNode, int landmarkID, int toGoToID); // returns an int? unsure
         // template <typename T>
         // Dstepping(Node<T>* toFind);
 

@@ -71,8 +71,11 @@ bool Pathfinder::shortestPath(int startNode, int endNode) {
 }
 
 
-int Pathfinder::landmarkPath(int landmarkID, int toGoToID) {
-    return 0;
+bool Pathfinder::landmarkPath(int startNode, int landmarkID, int toGoToID) {
+    bool pathFromStartToLandmark = shortestPath(startNode, landmarkID);
+    bool pathFromLandmarkToEnd = shortestPath(landmarkID, toGoToID);
+
+    return pathFromStartToLandmark && pathFromLandmarkToEnd;
 }
 
 void Pathfinder::dfs(int NodeID) {
