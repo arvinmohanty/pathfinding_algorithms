@@ -54,13 +54,3 @@ testSP.o : project-repo/tests/testSP.cpp
 catchmain.o : project-repo/catch/catch.hpp project-repo/catch/catchmain.cpp
 	$(CXX) $(CXXFLAGS) project-repo/catch/catchmain.cpp
 
-OBJS_TEST = testconstructor.o testSP.o catchmain.o
-
-testconstructor : project-repo/tests/testconstructor.cpp
-	$(CXX) $(CXXFLAGS) project-repo/tests/testconstructor.cpp
-
-testSP.o : project-repo/tests/testSP.cpp
-	$(CXX) $(CXXFLAGS) project-repo/tests/testSP.cpp
-	
-catchmain.o : project-repo/catch/catch.hpp project-repo/catch/catchmain.cpp
-	$(CXX) $(CXXFLAGS) project-repo/catch/catchmain.cpp
