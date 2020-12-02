@@ -35,7 +35,7 @@ bool Pathfinder::shortestPath(int startNode, int endNode) {
 	    bfs.pop();
 
         //i is each node id
-        for (int i : roads.adj_list[front]) {
+        for (auto i : roads.adj_list[front]) {
 
             if (has_seen[i] == false) {
                 has_seen[i] = true;
