@@ -40,7 +40,8 @@ UndirectedGraph::UndirectedGraph(string filename) {
 
     //need to add 1 to size so we can actually index last node
     node_count = max + 1;
-    adj_list.resize(node_count, vector<int>());
+    
+    adj_list.resize(node_count, std::set<int>());
 
     //reset ifstream to beginning or file to be reread and edges made
     file.clear();
@@ -82,14 +83,19 @@ UndirectedGraph::~UndirectedGraph() {
 
 void UndirectedGraph::addEdge(int start, int end) {
     //edge going from start to end, and end to start, since dataset is undirected according to stanford snap
-    adj_list[start].push_back(end);
+    //if 0 -> 1, dataset will have another line where 1->0
+    //but in testing where we use a truncated txt file, we may miss one of the edges (which is problematic since
+    //undirected graphs are directed graphs that have double facing edges
+
+    //therefore we add both, and we change adjacency list to be a vector of sets instead of vector or vectors to avoid repeats
+
+    adj_list[start].insert(end);
+    adj_list[end].insert(start);
+
 
     edge_count++;
 
-    //would normally do this step since undirected graph, but dataset represents starts/ends:
-    //adj_list[end].push_back(start);
-    //e.g. if 1 -> 5, 5 -> 1 will also be present
-    //dont want repeats
+    
     
 
 

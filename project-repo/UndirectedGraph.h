@@ -3,6 +3,7 @@
 #include <string>
 #include <fstream>
 #include <vector>
+#include <set>
 using std::string;
 
 //A road network of California. Intersections and endpoints are represented by nodes and 
@@ -24,8 +25,13 @@ class UndirectedGraph {
 
         UndirectedGraph(string filename);
 
+        //changed to sets to avoid repeats in testing issue
 
-        std::vector<std::vector<int>> adj_list;
+        // std::vector<std::vector<int>> adj_list;
+        
+        std::vector<std::set<int>> adj_list;
+
+
 
         void addEdge(int start, int end);
 

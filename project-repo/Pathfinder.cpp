@@ -43,7 +43,7 @@ bool Pathfinder::shortestPath(int startNode, int endNode) {
 
 
                 //have reached endNode
-
+                
                 if (i == endNode) {
                     std::cout << dist[i];
                     return true;
@@ -56,6 +56,10 @@ bool Pathfinder::shortestPath(int startNode, int endNode) {
 
     }
 
+    std::cout << "no path";
+
+    return false;
+
 
 }
 
@@ -65,8 +69,6 @@ bool Pathfinder::landmarkPath(int startNode, int landmarkID, int toGoToID) {
     bool pathFromLandmarkToEnd = shortestPath(landmarkID, toGoToID);
 
     return pathFromStartToLandmark && pathFromLandmarkToEnd;
-
-    return false;
 }
 
 void Pathfinder::dfs(int NodeID) {

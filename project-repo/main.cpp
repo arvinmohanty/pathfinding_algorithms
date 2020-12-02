@@ -8,7 +8,7 @@ int main() {
     //UndirectedGraph a("roadNet-CA.txt");
     UndirectedGraph a("project-repo/test");
     Pathfinder p(a);
-    p.shortestPath(0, 386);
-    p.landmarkPath(0, 386, 0);
+    p.shortestPath(0, 99);
+    
     
 }
