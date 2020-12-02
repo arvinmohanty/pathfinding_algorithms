@@ -1,6 +1,7 @@
 #include "Pathfinder.h"
 #include <iostream>
 #include <queue>
+#include <map>
 
 Pathfinder::Pathfinder() {
   
@@ -15,67 +16,55 @@ Pathfinder::Pathfinder(UndirectedGraph graph) {
 //using bfs and recording distance of each node visited from start node
 
 //too slow
-bool Pathfinder::shortestPath(int startNode, int endNode) {
+bool Pathfinder::shortestPath(int startNode) {
+    int V = roads.node_count; 
+    int E = roads.edge_count;
     
-
-    //for bfs
-
-    std::queue<int> bfs;
-
-    vector<bool> has_seen(roads.node_count, false);
-    vector<int> dist(roads.node_count);
+    int dist[V]; 
+  
     
-    //starting at start node
-    has_seen[startNode] = true;
-    dist[startNode] = 0;
+    for (int i = 0; i < V; i++) dist[i] = INT_MAX; 
 
-    bfs.push(startNode);
-
-    while (!bfs.empty()) {
-        int front = bfs.front();
-
-        //i is each node id
-        for (int i : roads.adj_list[front]) {
-
-            if (has_seen[i] == false) {
-                has_seen[i] = true;
-                dist[i] = dist[front] + 1;
+    dist[startNode] = 0; 
+  
+    
+    for (int i = 1; i <= V - 1; i++) { 
+        //iterating thru all the edges
+        for (int j = 0; j < roads.adj_list.size(); j++) { 
+            for (int k = 0; k < roads.adj_list[j].size(); k++) {
+                //wont go over nodes with no edges
 
 
-                //have reached endNode
+                int start = j;
+                int end = k;
 
-                if (i == endNode) {
-                    std::cout << dist[i];
-                    return true;
-                }
-                
-                bfs.push(i);
-                //pushing back for later bfs on this node
+                if (dist[start] != INT_MAX) dist[end] = dist[start] + 1;
+            
             }
-        }
+        } 
+    } 
 
-    }
-
-
-
-
-
-
-
-
-
-
-
+    std::cout << dist[1];
+  
     return 0;
+
+}
+
+void Pathfinder::shortest_path_dfs(int NodeID, int depth) {
+    
+
+
 
 }
 
 
 bool Pathfinder::landmarkPath(int startNode, int landmarkID, int toGoToID) {
-    bool pathFromStartToLandmark = shortestPath(startNode, landmarkID);
-    bool pathFromLandmarkToEnd = shortestPath(landmarkID, toGoToID);
+    // bool pathFromStartToLandmark = shortestPath(startNode, landmarkID);
+    // bool pathFromLandmarkToEnd = shortestPath(landmarkID, toGoToID);
 
-    return pathFromStartToLandmark && pathFromLandmarkToEnd;
+    // return pathFromStartToLandmark && pathFromLandmarkToEnd;
+
+    return false;
 }
 
 void Pathfinder::dfs(int NodeID) {

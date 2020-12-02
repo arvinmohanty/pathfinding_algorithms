@@ -60,6 +60,11 @@ UndirectedGraph::UndirectedGraph(string filename) {
         addEdge(start, end);
         
     }
+
+
+    //in undirected graphs, only count edges from distinct vertices once
+    edge_count /= 2;
+    
     
 
 
@@ -78,7 +83,14 @@ UndirectedGraph::~UndirectedGraph() {
 void UndirectedGraph::addEdge(int start, int end) {
     //edge going from start to end, and end to start, since dataset is undirected according to stanford snap
     adj_list[start].push_back(end);
-    adj_list[end].push_back(start);
+
+    edge_count++;
+
+    //would normally do this step since undirected graph, but dataset represents starts/ends:
+    //adj_list[end].push_back(start);
+    //e.g. if 1 -> 5, 5 -> 1 will also be present
+    //dont want repeats
+    
 
 
 
