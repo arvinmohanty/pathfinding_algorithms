@@ -1,5 +1,5 @@
 EXENAME = pathfind
-OBJS = main.o Node.o Pathfinder.o UndirectedGraph.o
+OBJS = main.o Pathfinder.o UndirectedGraph.o
 
 CXX = clang++
 CXXFLAGS = -std=c++1y -stdlib=libc++ -c -g -O0 -Wall -Wextra -pedantic
@@ -31,11 +31,8 @@ output_msg: ; $(CLANG_VERSION_MSG)
 $(EXENAME) : output_msg $(OBJS)
 	$(LD) $(OBJS) $(LDFLAGS) -o $(EXENAME)
 
-main.o : project-repo/main.cpp project-repo/Node.h project-repo/Pathfinder.h project-repo/UndirectedGraph.h
+main.o : project-repo/main.cpp project-repo/Pathfinder.h project-repo/UndirectedGraph.h
 	$(CXX) $(CXXFLAGS) project-repo/main.cpp
-
-Node.o : project-repo/Node.cpp project-repo/Node.h
-	$(CXX) $(CXXFLAGS) project-repo/Node.cpp
 
 Pathfinder.o : project-repo/Pathfinder.cpp project-repo/Pathfinder.h
 	$(CXX) $(CXXFLAGS) project-repo/Pathfinder.cpp
