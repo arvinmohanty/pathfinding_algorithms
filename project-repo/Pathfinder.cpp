@@ -74,6 +74,7 @@ vector<int> Pathfinder::shortestPath(int startNode, int endNode) {
     if (pathvector.size() <= 1) return vector<int>(); // if the length is 1 (meaning ONLY the end node has been pushed), return an empty vector
     //std::cout << "no path";
     //return false;
+    std::reverse(pathvector.begin(), pathvector.end());
     return pathvector; // otherwise return path vector
 }
 
@@ -82,6 +83,7 @@ vector<int> Pathfinder::landmarkPath(int startNode, int landmarkID, int toGoToID
     vector<int> pathFromStartToLandmark = shortestPath(startNode, landmarkID);
     vector<int> pathFromLandmarkToEnd = shortestPath(landmarkID, toGoToID);
     // appending landmarktoend to starttolandmark to make a final larger vector with both paths
+    pathFromLandmarkToEnd.erase(pathFromLandmarkToEnd.begin());
     pathFromStartToLandmark.insert(pathFromStartToLandmark.end(), pathFromLandmarkToEnd.begin(), pathFromLandmarkToEnd.end());
     // returning final vector
     return pathFromStartToLandmark;
