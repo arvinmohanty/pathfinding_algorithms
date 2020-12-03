@@ -1,13 +1,14 @@
 #pragma once
-#include "Node.h"
 #include "UndirectedGraph.h"
+#include <vector>
+using std::vector;
 
 class Pathfinder {
     public: 
         Pathfinder();
         Pathfinder(UndirectedGraph graph);
         
-        bool shortestPath(int startNode, int endNode); 
+        vector<int> shortestPath(int startNode, int endNode); 
 
         void shortest_path_dfs(int NodeID, int depth);
 
@@ -16,7 +17,7 @@ class Pathfinder {
 
         void dfs_helper(int NodeID, vector<bool> visited);
         
-        bool landmarkPath(int startNode, int landmarkID, int toGoToID); // returns an int? unsure
+        vector<int> landmarkPath(int startNode, int landmarkID, int toGoToID); // returns an int? unsure
         // template <typename T>
         // Dstepping(Node<T>* toFind);
 

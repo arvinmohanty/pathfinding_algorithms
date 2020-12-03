@@ -1,5 +1,4 @@
 #pragma once
-#include "Node.h"
 #include <string>
 #include <fstream>
 #include <vector>
@@ -34,23 +33,6 @@ class UndirectedGraph {
 
 
         void addEdge(int start, int end);
-
-
-        class DFS_iterator {
-            public:
-            // begin()
-            // end()
-            // operator ++
-            // operator -- (optional)
-            // operator*
-            // operator !=
-
-
-            
-            private:
-
-        };
-        
     private:
         
 

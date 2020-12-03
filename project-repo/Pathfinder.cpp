@@ -2,6 +2,9 @@
 #include <iostream>
 #include <queue>
 #include <map>
+#include <vector>
+
+using std::vector;
 
 Pathfinder::Pathfinder() {
   
@@ -15,9 +18,12 @@ Pathfinder::Pathfinder(UndirectedGraph graph) {
 //if path does not exist, return false
 //using bfs and recording distance of each node visited from start node
 
+vector<int> Pathfinder::shortestPath(int startNode, int endNode) {
 
-bool Pathfinder::shortestPath(int startNode, int endNode) {
-
+    // predecessor vector
+    vector<int> pred(roads.node_count, -1);
+    // path vector to return at end of function
+    vector<int> pathvector;
     
     std::queue<int> bfs;
 
@@ -40,13 +46,15 @@ bool Pathfinder::shortestPath(int startNode, int endNode) {
             if (has_seen[i] == false) {
                 has_seen[i] = true;
                 dist[i] = dist[front] + 1;
-
+                // predecessor of node id is the node at the front of queue / the IOP node
+                pred[i] = front;
 
                 //have reached endNode
                 
                 if (i == endNode) {
-                    std::cout << dist[i];
-                    return true;
+                    //std::cout << dist[i];
+                    //return true;
+                    break; // breaking as end node is reached
                 }
                 
                 bfs.push(i);
@@ -56,19 +64,27 @@ bool Pathfinder::shortestPath(int startNode, int endNode) {
 
     }
 
-    std::cout << "no path";
-
-    return false;
-
-
+    int dest = endNode; // copying value for end node as it will be modified
+    // pushing back end node
+    pathvector.push_back(dest);
+    while(pred[dest] != -1) { // while there is a valid predecessor
+        pathvector.push_back(pred[dest]); // pushes back all predecessors into the path vector
+        dest = pred[dest]; // sets new predecessor
+    }
+    if (pathvector.size() <= 1) return vector<int>(); // if the length is 1 (meaning ONLY the end node has been pushed), return an empty vector
+    //std::cout << "no path";
+    //return false;
+    return pathvector; // otherwise return path vector
 }
 
 
-bool Pathfinder::landmarkPath(int startNode, int landmarkID, int toGoToID) {
-    bool pathFromStartToLandmark = shortestPath(startNode, landmarkID);
-    bool pathFromLandmarkToEnd = shortestPath(landmarkID, toGoToID);
-
-    return pathFromStartToLandmark && pathFromLandmarkToEnd;
+vector<int> Pathfinder::landmarkPath(int startNode, int landmarkID, int toGoToID) {
+    vector<int> pathFromStartToLandmark = shortestPath(startNode, landmarkID);
+    vector<int> pathFromLandmarkToEnd = shortestPath(landmarkID, toGoToID);
+    // appending landmarktoend to starttolandmark to make a final larger vector with both paths
+    pathFromStartToLandmark.insert(pathFromStartToLandmark.end(), pathFromLandmarkToEnd.begin(), pathFromLandmarkToEnd.end());
+    // returning final vector
+    return pathFromStartToLandmark;
 }
 
 void Pathfinder::dfs(int NodeID) {
