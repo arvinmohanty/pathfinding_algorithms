@@ -5,9 +5,10 @@
 
 int main() {
     
-    UndirectedGraph a("project-repo/tests/testdata1");
+    UndirectedGraph a("project-repo/tests/testdata2.txt");
    Pathfinder p(a);
- 
+ //first dataset
+
    vector<int> arv = p.dfs(1);
    for (int b : arv) std::cout << b <<std::endl;
    std::cout << std::endl;
@@ -24,6 +25,8 @@ int main() {
    vector<int> landmark_path = p.landmarkPath(1, 384, 1);
    for (int b : landmark_path) std::cout << b << std::endl;
    std::cout << std::endl;
+
+
     
     
 
