@@ -83,6 +83,7 @@ vector<int> Pathfinder::shortestPath(int startNode, int endNode) {
 vector<int> Pathfinder::landmarkPath(int startNode, int landmarkID, int toGoToID) {
     vector<int> pathFromStartToLandmark = shortestPath(startNode, landmarkID);
     vector<int> pathFromLandmarkToEnd = shortestPath(landmarkID, toGoToID);
+    if (pathFromLandmarkToEnd.empty() || pathFromStartToLandmark.empty()) return vector<int>();
     // appending landmarktoend to starttolandmark to make a final larger vector with both paths
     pathFromLandmarkToEnd.erase(pathFromLandmarkToEnd.begin());
     pathFromStartToLandmark.insert(pathFromStartToLandmark.end(), pathFromLandmarkToEnd.begin(), pathFromLandmarkToEnd.end());
