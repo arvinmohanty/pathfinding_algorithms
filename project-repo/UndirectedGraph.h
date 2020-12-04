@@ -17,7 +17,7 @@ class UndirectedGraph {
         void load(string filename);
         ~UndirectedGraph();
 
-        int node_count;
+        int adj_list_size;
 
         int edge_count = 0;
 

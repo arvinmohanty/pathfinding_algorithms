@@ -21,14 +21,14 @@ Pathfinder::Pathfinder(UndirectedGraph graph) {
 vector<int> Pathfinder::shortestPath(int startNode, int endNode) {
 
     // predecessor vector
-    vector<int> pred(roads.node_count, -1);
+    vector<int> pred(roads.adj_list_size, -1);
     // path vector to return at end of function
     vector<int> pathvector;
     
     std::queue<int> bfs;
 
-    vector<bool> has_seen(roads.node_count, false);
-    vector<int> dist(roads.node_count);
+    vector<bool> has_seen(roads.adj_list_size, false);
+    vector<int> dist(roads.adj_list_size);
     
     //starting at start node
     has_seen[startNode] = true;
@@ -89,16 +89,20 @@ vector<int> Pathfinder::landmarkPath(int startNode, int landmarkID, int toGoToID
     return pathFromStartToLandmark;
 }
 
-void Pathfinder::dfs(int NodeID) {
-    std::vector<bool> visited(roads.node_count, false);
-    dfs_helper(NodeID, visited);
+vector<int> Pathfinder::dfs(int NodeID) {
+    std::vector<bool> visited(roads.adj_list_size, false);
+    std::vector<int> path;
+    dfs_helper(NodeID, visited, path);
+
+    return path;
 
 }
 
 //dfs complete
-void Pathfinder::dfs_helper(int NodeID, std::vector<bool> visited) {
+void Pathfinder::dfs_helper(int NodeID, std::vector<bool> visited, vector<int>& path) {
     
     visited[NodeID] = true;
+    path.push_back(NodeID);
     // std::cout << NodeID;
 
     //each int i corresponds to a nodeID

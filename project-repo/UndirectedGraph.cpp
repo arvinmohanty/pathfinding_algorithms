@@ -39,9 +39,9 @@ UndirectedGraph::UndirectedGraph(string filename) {
     }
 
     //need to add 1 to size so we can actually index last node
-    node_count = max + 1;
+    adj_list_size = max + 1;
     
-    adj_list.resize(node_count, std::set<int>());
+    adj_list.resize(adj_list_size, std::set<int>());
 
     //reset ifstream to beginning or file to be reread and edges made
     file.clear();

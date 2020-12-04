@@ -13,15 +13,15 @@ class Pathfinder {
         void shortest_path_dfs(int NodeID, int depth);
 
         //nodeID from starting node
-        void dfs(int NodeID);
+        vector<int> dfs(int NodeID);
 
-        void dfs_helper(int NodeID, vector<bool> visited);
+        void dfs_helper(int NodeID, vector<bool> visited, vector<int>& path);
         
         vector<int> landmarkPath(int startNode, int landmarkID, int toGoToID); // returns an int? unsure
-        // template <typename T>
-        // Dstepping(Node<T>* toFind);
+        
+        
 
-        int node_count;
+        int adj_list_size;
 
         UndirectedGraph roads;
     private:
