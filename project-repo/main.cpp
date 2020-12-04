@@ -9,6 +9,8 @@ int main() {
     UndirectedGraph a("project-repo/tests/testdata1");
     Pathfinder p(a);
 
+    vector<int> arv = p.dfs(1);
+    // std::cout << arv.size();
     // vector<int> arvi = p.dfs(1);
     // for (int i : arvi) std::cout << i;
 
@@ -16,8 +18,8 @@ int main() {
 
  
 
-    std::vector<int> arv = p.connectedComponent();
-    for (int i : arv) std::cout << i;
+    // std::vector<int> arv = p.connectedComponent();
+    // for (int i : arv) std::cout << i;
 
 
     
