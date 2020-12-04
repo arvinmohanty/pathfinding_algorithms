@@ -135,7 +135,7 @@ vector<int> Pathfinder::connectedComponent() {
 
     
 
-    for (int i = 0; i < roads.adj_list.size(); i++) {
+    for (int i = 0; i < (int) roads.adj_list.size(); i++) {
         //everytime u load in adj matrix, u create the size based upon the largest value,
         //but u may not be looking at the entire file, so need to check if roads.adj_list[i].size() > 0,
         //to make sure that vertex exists
@@ -168,7 +168,7 @@ vector<int> Pathfinder::strongestConnectedComponent() {
 
     
     vector<int> connected = connectedComponent();
-    if (connected.size() == existing_vertices) {
+    if ((int) connected.size() == existing_vertices) {
         return connected;
     } 
         
