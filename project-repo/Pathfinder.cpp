@@ -16,8 +16,7 @@ Pathfinder::Pathfinder(UndirectedGraph graph) {
     roads = graph;
 }
 
-//if path does not exist, return false
-//using bfs and recording distance of each node visited from start node
+
 
 vector<int> Pathfinder::shortestPath(int startNode, int endNode) {
 
