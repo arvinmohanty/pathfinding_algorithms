@@ -99,6 +99,21 @@ vector<int> Pathfinder::dfs(int NodeID) {
 
 }
 
+// void Pathfinder::dfs_helper(int NodeID, std::vector<bool> visited) {
+
+//      visited[NodeID] = true;
+//     std::cout << NodeID;
+//      //adj_list[NodeID]
+
+//      //each int i corresponds to a nodeID
+//      for (int i : roads.adj_list[NodeID]) {
+//          if (!visited[i]) dfs_helper(i, visited);
+//      }
+
+
+
+//  }
+
 //dfs complete
 void Pathfinder::dfs_helper(int NodeID, std::vector<bool>& visited, vector<int>& path) {
     

@@ -16,7 +16,9 @@ class Pathfinder {
         //nodeID from starting node
         vector<int> dfs(int NodeID);
 
+        // void dfs_helper(int NodeID, vector<bool>& visited, vector<int>& path);
         void dfs_helper(int NodeID, vector<bool>& visited, vector<int>& path);
+
         
         vector<int> landmarkPath(int startNode, int landmarkID, int toGoToID); // returns an int? unsure
 
