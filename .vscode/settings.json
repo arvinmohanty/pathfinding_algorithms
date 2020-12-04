@@ -68,6 +68,9 @@
         "queue": "cpp",
         "random": "cpp",
         "set": "cpp",
-        "string": "cpp"
+        "string": "cpp",
+        "regex": "cpp",
+        "optional": "cpp",
+        "stack": "cpp"
     }
 }

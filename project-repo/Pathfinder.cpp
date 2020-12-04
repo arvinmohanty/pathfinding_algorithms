@@ -3,6 +3,7 @@
 #include <queue>
 #include <map>
 #include <vector>
+#include <set>
 
 using std::vector;
 
@@ -99,7 +100,7 @@ vector<int> Pathfinder::dfs(int NodeID) {
 }
 
 //dfs complete
-void Pathfinder::dfs_helper(int NodeID, std::vector<bool> visited, vector<int>& path) {
+void Pathfinder::dfs_helper(int NodeID, std::vector<bool>& visited, vector<int>& path) {
     
     visited[NodeID] = true;
     path.push_back(NodeID);
@@ -107,8 +108,56 @@ void Pathfinder::dfs_helper(int NodeID, std::vector<bool> visited, vector<int>& 
 
     //each int i corresponds to a nodeID
     for (int i : roads.adj_list[NodeID]) {
-        if (!visited[i]) dfs_helper(i, visited);
+        if (!visited[i]) dfs_helper(i, visited, path);
     }
+}
+
+vector<int> Pathfinder::connectedComponent() {
+    //using dfs
+    
+    std::vector<bool> has_seen(roads.adj_list.size(), false);
+    vector<int> connectedComponent;
+
+    
+
+    for (int i = 0; i < roads.adj_list.size(); i++) {
+        //everytime u load in adj matrix, u create the size based upon the largest value,
+        //but u may not be looking at the entire file, so need to check if roads.adj_list[i].size() > 0,
+        //to make sure that vertex exists
+        if (roads.adj_list[i].size() > 0 && !has_seen[i]) {
+            vector<int> path;
+            
+            dfs_helper(i, has_seen, path);
+
+            if (path.size() > connectedComponent.size()) connectedComponent = path;
+        }
+    }
+
+    
+
+    return connectedComponent;
+}
+
+vector<int> Pathfinder::strongestConnectedComponent() {
+    int existing_vertices = 0;
+
+    //this step is necessary since (comment above is same)
+    //everytime u load in adj matrix, u create the size based upon the largest value,
+    //but u may not be looking at the entire file, b
+
+    //hence u now make sure that u have the appropriate amount of vertices w existing_vertices
+    
+    for (std::set<int> a : roads.adj_list) {
+        if (a.size() > 0) existing_vertices++;
+    }
+
+    
+    vector<int> connected = connectedComponent();
+    if (connected.size() == existing_vertices) {
+        return connected;
+    } 
+        
+    return vector<int>();
 
 
 
