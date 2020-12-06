@@ -11,3 +11,13 @@ TEST_CASE("Test basic shortest path") {
 
   REQUIRE(expected == path);
 }
+
+TEST_CASE("Test reserve basic shortest path") {
+  UndirectedGraph graph("project-repo/tests/testdata2.txt");
+  Pathfinder pathfinder(graph);
+
+  std::vector<int> expected = {44, 43, 42, 41, 40};
+  std::vector<int> path = pathfinder.shortestPath(44, 40);
+
+  REQUIRE(expected == path);
+}
