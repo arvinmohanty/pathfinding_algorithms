@@ -18,7 +18,8 @@ Pathfinder::Pathfinder(UndirectedGraph graph) {
 
 vector<int> Pathfinder::shortestPath(int startNode, int endNode) {
     if (startNode < 0 || endNode < 0 || 
-        startNode > roads.adj_list_size || endNode > roads.adj_list_size) return std::vector<int>();
+        startNode > roads.adj_list_size || endNode > roads.adj_list_size
+        || roads.adj_list[startNode].size() == 0 || roads.adj_list[endNode].size() == 0) return std::vector<int>();
 
     // predecessor vector
     vector<int> pred(roads.adj_list_size, -1);
