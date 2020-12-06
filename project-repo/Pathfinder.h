@@ -19,10 +19,11 @@ class Pathfinder {
         Pathfinder(UndirectedGraph graph);
         
         // finds the shortest path between two nodes using a modified BFS which returns a vector of the path
+        // returns an empty vector if no path is found
         vector<int> shortestPath(int startNode, int endNode); 
 
         // NOT IMPLEMENTED!!
-        void shortest_path_dfs(int NodeID, int depth);
+        vector<int> shortest_path_dfs(int NodeID, int depth);
 
         // uses a depth first search to return the path to a node (in a vector of ints) with NodeID
         vector<int> dfs(int NodeID);
@@ -33,6 +34,7 @@ class Pathfinder {
 
         // finds the landmark path between three nodes
         // does this by finding the path from startnode->landmarkID, then the path from landmarkID->toGoToID in a single vector
+        // returns an empty vector if no path is found
         vector<int> landmarkPath(int startNode, int landmarkID, int toGoToID); 
 
 
