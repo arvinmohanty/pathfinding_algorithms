@@ -171,8 +171,6 @@ vector<int> Pathfinder::strongestConnectedComponent() {
     // returns an empty vector if that does not exist    
     return vector<int>();
 
-
-
 }
 
 
