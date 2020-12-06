@@ -8,14 +8,12 @@
 using std::vector;
 
 Pathfinder::Pathfinder() {
-  
+
 }
 
 Pathfinder::Pathfinder(UndirectedGraph graph) {
-
     roads = graph;
 }
-
 
 
 vector<int> Pathfinder::shortestPath(int startNode, int endNode) {
@@ -24,10 +22,11 @@ vector<int> Pathfinder::shortestPath(int startNode, int endNode) {
     vector<int> pred(roads.adj_list_size, -1);
     // path vector to return at end of function
     vector<int> pathvector;
-    
+    // queue for the breadth first search
     std::queue<int> bfs;
-
+    // vector of booleans with each index acting as the NodeId. shows whether a node has been visited or not
     vector<bool> has_seen(roads.adj_list_size, false);
+    // a vector maintaining the distance of each nodeID to the final node
     vector<int> dist(roads.adj_list_size);
     
     //starting at start node
@@ -52,8 +51,6 @@ vector<int> Pathfinder::shortestPath(int startNode, int endNode) {
                 //have reached endNode
                 
                 if (i == endNode) {
-                    //std::cout << dist[i];
-                    //return true;
                     break; // breaking as end node is reached
                 }
                 
@@ -67,80 +64,77 @@ vector<int> Pathfinder::shortestPath(int startNode, int endNode) {
     int dest = endNode; // copying value for end node as it will be modified
     // pushing back end node
     pathvector.push_back(dest);
+
     while(pred[dest] != -1) { // while there is a valid predecessor
         pathvector.push_back(pred[dest]); // pushes back all predecessors into the path vector
         dest = pred[dest]; // sets new predecessor
     }
-    if (pathvector.size() <= 1) return vector<int>(); // if the length is 1 (meaning ONLY the end node has been pushed), return an empty vector
-    //std::cout << "no path";
-    //return false;
+
+    // if the length is 1 (meaning ONLY the end node has been pushed and there is no valid path), return an empty vector
+    if (pathvector.size() <= 1) return vector<int>(); 
+    
+    // reverse vector as it is currently the path from end node to start node, need to instead return start node -> end node
     std::reverse(pathvector.begin(), pathvector.end());
-    return pathvector; // otherwise return path vector
+    return pathvector; 
 }
 
 
 vector<int> Pathfinder::landmarkPath(int startNode, int landmarkID, int toGoToID) {
+    
+    // finding the shortest path between startNode and landmark, and also landmark to togotoID
     vector<int> pathFromStartToLandmark = shortestPath(startNode, landmarkID);
     vector<int> pathFromLandmarkToEnd = shortestPath(landmarkID, toGoToID);
+
+    // returns an empty vector if either path is empty, meaning there is no valid path
     if (pathFromLandmarkToEnd.empty() || pathFromStartToLandmark.empty()) return vector<int>();
-    // appending landmarktoend to starttolandmark to make a final larger vector with both paths
+
+    // erasing the point of the landmark node as it will be duplicated
     pathFromLandmarkToEnd.erase(pathFromLandmarkToEnd.begin());
+
+    // appending landmarktoend to starttolandmark to make a final larger vector with both paths
     pathFromStartToLandmark.insert(pathFromStartToLandmark.end(), pathFromLandmarkToEnd.begin(), pathFromLandmarkToEnd.end());
     // returning final vector
     return pathFromStartToLandmark;
 }
 
 vector<int> Pathfinder::dfs(int NodeID) {
+    // vector of visited nodes with index representing node IDs
     std::vector<bool> visited(roads.adj_list_size, false);
+    // vector of the current path
     std::vector<int> path;
+
+    // call to DFS helper which will fill the path vector
     dfs_helper(NodeID, visited, path);
 
-    
-
     return path;
-
 }
 
-// void Pathfinder::dfs_helper(int NodeID, std::vector<bool> visited) {
-
-//      visited[NodeID] = true;
-//     std::cout << NodeID;
-//      //adj_list[NodeID]
-
-//      //each int i corresponds to a nodeID
-//      for (int i : roads.adj_list[NodeID]) {
-//          if (!visited[i]) dfs_helper(i, visited);
-//      }
-
-
-
-//  }
-
-//dfs complete
 void Pathfinder::dfs_helper(int NodeID, std::vector<bool>& visited, vector<int>& path) {
     
+    // current node has just been visited
     visited[NodeID] = true;
     path.push_back(NodeID);
-    // std::cout << NodeID;
 
     //each int i corresponds to a nodeID
     for (int i : roads.adj_list[NodeID]) {
+
+        // recursive call onto the next unvisited node
         if (!visited[i]) dfs_helper(i, visited, path);
     }
 }
 
 vector<int> Pathfinder::connectedComponent() {
-    //using dfs
-    
+
+    //using dfs - similar vector of visited nodes like the one above
     std::vector<bool> has_seen(roads.adj_list.size(), false);
+
+    // vector containing the nodes in the connected component
     vector<int> connectedComponent;
 
-    
-
     for (int i = 0; i < (int) roads.adj_list.size(); i++) {
-        //everytime u load in adj matrix, u create the size based upon the largest value,
-        //but u may not be looking at the entire file, so need to check if roads.adj_list[i].size() > 0,
-        //to make sure that vertex exists
+        // every time the adj matrix is loaded, the size is based on the largest value
+        // however we may not be looking at the entire file (testing in snippets)
+        // hence we need to check if roads.adj_list[i].size() > 0, in order to make sure the vertex exists
         if (roads.adj_list[i].size() > 0 && !has_seen[i]) {
             vector<int> path;
             
@@ -150,19 +144,18 @@ vector<int> Pathfinder::connectedComponent() {
         }
     }
 
-    
-
     return connectedComponent;
 }
 
 vector<int> Pathfinder::strongestConnectedComponent() {
     int existing_vertices = 0;
 
-    //this step is necessary since (comment above is same)
-    //everytime u load in adj matrix, u create the size based upon the largest value,
-    //but u may not be looking at the entire file, b
+    // similar to the code above:
+    // every time the adj matrix is loaded, the size is based on the largest value
+    // however we may not be looking at the entire file (testing in snippets)
+    // hence we need to check if roads.adj_list[i].size() > 0, in order to make sure the vertex exists
+    // we only add to existing vertices if this is the case
 
-    //hence u now make sure that u have the appropriate amount of vertices w existing_vertices
     
     for (std::set<int> a : roads.adj_list) {
         if (a.size() > 0) existing_vertices++;
@@ -170,10 +163,12 @@ vector<int> Pathfinder::strongestConnectedComponent() {
 
     
     vector<int> connected = connectedComponent();
+    // returns the connected component with the value of existing vertices (hence the strongest component)
     if ((int) connected.size() == existing_vertices) {
         return connected;
     } 
-        
+
+    // returns an empty vector if that does not exist    
     return vector<int>();
 
 

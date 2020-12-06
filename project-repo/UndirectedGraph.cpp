@@ -56,7 +56,6 @@ UndirectedGraph::UndirectedGraph(string filename) {
         int end;
 
         split >> start >> end;
-        //std::cout << start << " " << end << std::endl;
 
         addEdge(start, end);
         
@@ -66,14 +65,66 @@ UndirectedGraph::UndirectedGraph(string filename) {
     //in undirected graphs, only count edges from distinct vertices once
     edge_count /= 2;
     
-    
-
-
-
 
 }
 
 void UndirectedGraph::load(string filename) {
+
+    //adjacency matrix wont work because of space constraints, ud have a matrix with 1.9 million
+    //rows each with 1.9 million
+    //adjacency list works since the road network is sparse, intuition: roads in one place dont connect to roads
+    //in a completely different place (not all the others), so each inner vector will be smaller than 1.9 million
+
+    std::string arv;
+    std::ifstream file(filename);
+    
+    
+    int max = INT_MIN;
+
+    //two pass approach, first to find highest node id (tells us how many nodes there could maximally be), 
+    //second to put edges into adjacency list
+    //need highest node since nodes are named starting from 0
+
+    while(getline(file, arv)) {
+        
+        if (arv[0] == '#') continue;
+    
+        std::stringstream split(arv);
+        int start;
+        int end;
+
+        split >> start >> end;
+
+        max = std::max(max, std::max(start, end));
+        
+    }
+
+    //need to add 1 to size so we can actually index last node
+    adj_list_size = max + 1;
+    
+    adj_list.resize(adj_list_size, std::set<int>());
+
+    //reset ifstream to beginning or file to be reread and edges made
+    file.clear();
+    file.seekg(0);
+
+    while(getline(file, arv)) {
+        
+        if (arv[0] == '#') continue;
+    
+        std::stringstream split(arv);
+        int start;
+        int end;
+
+        split >> start >> end;
+
+        addEdge(start, end);
+        
+    }
+
+
+    //in undirected graphs, only count edges from distinct vertices once
+    edge_count /= 2;
 
 }
 
