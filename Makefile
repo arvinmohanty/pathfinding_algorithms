@@ -42,8 +42,10 @@ UndirectedGraph.o : project-repo/UndirectedGraph.cpp project-repo/UndirectedGrap
 
 OBJS_TEST = testconstructor.o testSP.o catchmain.o
 
-shortestPathTest : output_msg testSP.o catchmain.o Pathfinder.o UndirectedGraph.o
-	$(LD) testSP.o catchmain.o Pathfinder.o UndirectedGraph.o $(LDFLAGS) -o shortestPathTest
+SHORTEST_PATH_OBJS = testSP.o catchmain.o Pathfinder.o UndirectedGraph.o
+
+shortestPathTest : output_msg $(SHORTEST_PATH_OBJS)
+	$(LD) $(SHORTEST_PATH_OBJS) $(LDFLAGS) -o shortestPathTest
 
 testconstructor : project-repo/tests/testconstructor.cpp
 	$(CXX) $(CXXFLAGS) project-repo/tests/testconstructor.cpp
