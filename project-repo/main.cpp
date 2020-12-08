@@ -11,6 +11,9 @@ int main() {
    b.load("project-repo/tests/testdata2.txt");
    Pathfinder p2(b);
 
+   UndirectedGraph c("project-repo/tests/testdata1");
+   Pathfinder d(c);
+
    /*vector<int> arv = p.dfs(1);
    for (int b : arv) std::cout << b <<std::endl;
    std::cout << std::endl;*/
@@ -20,14 +23,10 @@ int main() {
    for (int b : connected) std::cout << b <<std::endl;
    std::cout << std::endl;*/
  
-   vector<int> shortestPath = p.shortestPath(40, 44);
-   for (int c : shortestPath) std::cout << c << std::endl;
+   vector<int> landmark = d.landmarkPath(8, 94, 17);
+   for (int c : landmark) std::cout << c << std::endl;
    std::cout << std::endl;
    
-
-   vector<int> shortestPath2 = p2.shortestPath(40, 44);
-   for (int c : shortestPath2) std::cout << c << std::endl;
-   std::cout << std::endl;
 
  
    /*vector<int> landmark_path = p.landmarkPath(1, 384, 1);

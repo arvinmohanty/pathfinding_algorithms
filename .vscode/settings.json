@@ -71,6 +71,12 @@
         "string": "cpp",
         "regex": "cpp",
         "optional": "cpp",
-        "stack": "cpp"
+        "stack": "cpp",
+        "__errc": "cpp",
+        "__node_handle": "cpp",
+        "__string": "cpp",
+        "__threading_support": "cpp",
+        "bit": "cpp",
+        "string_view": "cpp"
     }
 }
