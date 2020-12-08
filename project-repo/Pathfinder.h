@@ -40,6 +40,7 @@ class Pathfinder {
 
         //returns connected component: a maximal connected subgraph of an undirected graph
         //helper function for strongest connected component
+        // returns FIRST largest connected component found if multiple are found!!
         vector<int> connectedComponent();
 
         //returns vector if there is a strongest connected component: all vertices are part of one graph

@@ -11,7 +11,7 @@ int main() {
    b.load("project-repo/tests/testdata2.txt");
    Pathfinder p2(b);
 
-   UndirectedGraph c("project-repo/tests/testdata1");
+   UndirectedGraph c("project-repo/tests/testdataSCC2.txt");
    Pathfinder d(c);
 
    /*vector<int> arv = p.dfs(1);
@@ -23,7 +23,7 @@ int main() {
    for (int b : connected) std::cout << b <<std::endl;
    std::cout << std::endl;*/
  
-   vector<int> landmark = d.landmarkPath(8, 94, 17);
+   vector<int> landmark = d.strongestConnectedComponent();
    for (int c : landmark) std::cout << c << std::endl;
    std::cout << std::endl;
    
