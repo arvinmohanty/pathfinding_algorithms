@@ -35,6 +35,9 @@ TEST_CASE("Connected component returns largest possible connected component") {
 }
 
 TEST_CASE("Connected component returns first if multiple of the same size found") {
+    // for example, if the largest connected component was of size 3, and there were 2 connected components of that size
+    // it would return the first occurence of the component
+    // pathfinder.h has been updated to specify this in comments above the function signature
     UndirectedGraph graph("project-repo/tests/testdataCC2.txt");
     Pathfinder pathfinder(graph);
     vector<int> expected = {0, 1};
