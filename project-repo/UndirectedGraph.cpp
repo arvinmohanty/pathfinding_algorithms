@@ -79,7 +79,7 @@ void UndirectedGraph::addEdge(int start, int end) {
     //but in testing where we use a truncated txt file, we may miss one of the edgessince it is lower or higher in the file (which is problematic since
     //undirected graphs are directed graphs that have double facing edges)
 
-    //therefore we add both, and we change adjacency list to be a vector of sets instead of vector or vectors to avoid repeats, this cleaned up the edge cases
+    //therefore we add both, and we change adjacency list to be a vector of sets instead of vector or vectors to avoid repeats, this cleaned up some edge cases
 
     adj_list[start].insert(end);
     adj_list[end].insert(start);
