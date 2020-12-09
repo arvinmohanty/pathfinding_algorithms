@@ -100,6 +100,8 @@ vector<int> Pathfinder::landmarkPath(int startNode, int landmarkID, int toGoToID
 }
 
 vector<int> Pathfinder::dfs(int NodeID) {
+    if (NodeID < 0 || NodeID > (roads.adj_list_size - 1)) return vector<int>();
+
     // vector of visited nodes with index representing node IDs
     std::vector<bool> visited(roads.adj_list_size, false);
     // vector of the current path
