@@ -3,4 +3,4 @@ Week 1 (11/25)
 Week 2 (12/2)
 This week we set up the test heirarchy in the Makefile, Github, and added catch.  We set up the contructor to properly build the graph.  We also focused on getting everyone behind the dataset and understanding how the graph adjacency list represntation works.  Through this, we were able to implement the shortest path algorithm and the landmark path.  Next week, we hope to have the project done by 12/9 for our meeting about the video.  Next week the final algorithm will be finished and testing will be as well.
 Week 3 (12/10)
-This week's date was pushed back a day just for finishing testing/the video.  All test cases pass and the project is done.
+This week's date was pushed back a day just for finishing testing/the video.  All test cases pass, we fixed edge cases, and the project is done.
