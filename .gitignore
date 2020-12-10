@@ -5,3 +5,6 @@
 pathfind
 shortestPathTest
 undirectedGraphTest
+dfsTest
+landmarkPathTest
+sccTest
